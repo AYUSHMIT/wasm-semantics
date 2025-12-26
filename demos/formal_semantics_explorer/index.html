@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAssembly Formal Semantics Explorer | K Framework</title>
+    <meta name="description" content="Interactive educational showcase of formally verified WebAssembly semantics using the K Framework">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/styles/formal_methods.css">
+    <link rel="stylesheet" href="assets/styles/wasm_syntax_highlight.css">
+    <link rel="stylesheet" href="assets/styles/interactive.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-background"></div>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <img src="assets/images/k_framework_logo.svg" alt="K Framework" class="logo" onerror="this.style.display='none'">
+                <h1>KWasm Explorer</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#learning-paths">Learn</a></li>
+                <li><a href="#tutorials">Tutorials</a></li>
+                <li><a href="#playground">Playground</a></li>
+                <li><a href="https://github.com/AYUSHMIT/wasm-semantics" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a></li>
+            </ul>
+        </nav>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-icon">🔬</span>
+                <span>Formal Verification Made Visual</span>
+            </div>
+            <h2 class="hero-title">WebAssembly Formal Semantics Explorer</h2>
+            <p class="hero-subtitle">
+                An Interactive Journey Through Formal Verification of WebAssembly using the K Framework
+            </p>
+            <div class="hero-buttons">
+                <a href="#quick-start" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Get Started
+                </a>
+                <a href="02_interactive_tutorials/hello_wasm_semantics/" class="btn btn-secondary">
+                    <i class="fas fa-play"></i> Try Demo
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <strong>500+</strong>
+                    <span>K Rules</span>
+                </div>
+                <div class="stat">
+                    <strong>180+</strong>
+                    <span>Instructions</span>
+                </div>
+                <div class="stat">
+                    <strong>40+</strong>
+                    <span>Visualizations</span>
+                </div>
+                <div class="stat">
+                    <strong>15</strong>
+                    <span>Case Studies</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- What is This Section -->
+    <section class="section what-is-this">
+        <div class="container">
+            <h2 class="section-title">🎯 What is This?</h2>
+            <p class="section-intro">
+                This is an <strong>interactive educational showcase</strong> of formally verified WebAssembly semantics 
+                defined in the K Framework. It transforms abstract formal methods into accessible, visual, and engaging content.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Visual Execution Traces</h3>
+                    <p>Watch WebAssembly instructions execute step-by-step with animated stack operations</p>
+                    <a href="03_visualization_gallery/execution_traces/" class="feature-link">Explore →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Interactive Proof Trees</h3>
+                    <p>Explore formal verification derivations with collapsible tree visualizations</p>
+                    <a href="03_visualization_gallery/proof_trees/" class="feature-link">View →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Memory Visualizations</h3>
+                    <p>See stack, heap, and linear memory in interactive 3D space</p>
+                    <a href="03_visualization_gallery/memory_models/" class="feature-link">Navigate →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Hands-on Playground</h3>
+                    <p>Write, verify, and debug WebAssembly code in your browser</p>
+                    <a href="06_interactive_playground/" class="feature-link">Play →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Educational Narratives</h3>
+                    <p>Learn through story-driven tutorials and guided examples</p>
+                    <a href="07_educational_narratives/" class="feature-link">Read →</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧪</div>
+                    <h3>Verification Case Studies</h3>
+                    <p>Real-world security property proofs and formal analysis</p>
+                    <a href="04_verification_case_studies/" class="feature-link">Study →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section id="quick-start" class="section quick-start">
+        <div class="container">
+            <h2 class="section-title">🚀 Quick Start</h2>
+            
+            <div class="quick-start-tabs">
+                <button class="tab-button active" data-tab="local">Local Setup</button>
+                <button class="tab-button" data-tab="online">Online Demo</button>
+                <button class="tab-button" data-tab="docker">Docker</button>
+            </div>
+            
+            <div class="tab-content active" data-tab="local">
+                <div class="code-block">
+                    <pre><code># Clone the repository
+git clone https://github.com/AYUSHMIT/wasm-semantics.git
+cd wasm-semantics/demos/formal_semantics_explorer
+
+# Install dependencies (requires K Framework)
+make install-deps
+
+# Launch interactive explorer
+make serve
+# Opens http://localhost:8000 in your browser
+
+# Run example verification
+make verify-example EXAMPLE=memory_safety/bounds_overflow</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab="online">
+                <p>Try the online demo without any installation:</p>
+                <div class="demo-buttons">
+                    <a href="02_interactive_tutorials/hello_wasm_semantics/" class="btn btn-primary">
+                        <i class="fas fa-play-circle"></i> Hello Wasm Demo
+                    </a>
+                    <a href="06_interactive_playground/wasm_editor/" class="btn btn-secondary">
+                        <i class="fas fa-code"></i> WebAssembly Editor
+                    </a>
+                    <a href="03_visualization_gallery/execution_traces/" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i> Execution Visualizer
+                    </a>
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab="docker">
+                <div class="code-block">
+                    <pre><code># Pull Docker image
+docker pull ghcr.io/ayushmit/wasm-semantics:latest
+
+# Run container
+docker run -p 8000:8000 ghcr.io/ayushmit/wasm-semantics:latest
+
+# Open browser to http://localhost:8000</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Paths Section -->
+    <section id="learning-paths" class="section learning-paths">
+        <div class="container">
+            <h2 class="section-title">📚 Learning Paths</h2>
+            
+            <div class="paths-grid">
+                <div class="path-card beginner">
+                    <div class="path-header">
+                        <span class="path-level">🟢 Beginner</span>
+                        <span class="path-duration">2-3 hours</span>
+                    </div>
+                    <h3>First Steps in Formal Semantics</h3>
+                    <ul class="path-steps">
+                        <li><a href="01_introduction/00_what_is_formal_semantics.md">What is Formal Semantics?</a></li>
+                        <li><a href="02_interactive_tutorials/hello_wasm_semantics/">Hello WebAssembly Semantics</a></li>
+                        <li><a href="07_educational_narratives/story_1_stack_machine/">The Stack Machine Journey</a></li>
+                        <li><a href="06_interactive_playground/wasm_editor/">WebAssembly Editor</a></li>
+                    </ul>
+                    <p class="path-goal"><strong>Goal:</strong> Understand how formal semantics describes program behavior</p>
+                </div>
+                
+                <div class="path-card intermediate">
+                    <div class="path-header">
+                        <span class="path-level">🟡 Intermediate</span>
+                        <span class="path-duration">6-8 hours</span>
+                    </div>
+                    <h3>Verification Practitioner</h3>
+                    <ul class="path-steps">
+                        <li><a href="02_interactive_tutorials/control_flow/">Loops & Branches</a></li>
+                        <li><a href="02_interactive_tutorials/memory_operations/">Bounds Checking</a></li>
+                        <li><a href="04_verification_case_studies/type_soundness/">Type Soundness</a></li>
+                        <li><a href="05_k_framework_deep_dive/rewrite_rules/">Rewrite Rules</a></li>
+                        <li><a href="06_interactive_playground/verification_sandbox/">Verification Sandbox</a></li>
+                    </ul>
+                    <p class="path-goal"><strong>Goal:</strong> Verify safety properties of WebAssembly programs</p>
+                </div>
+                
+                <div class="path-card advanced">
+                    <div class="path-header">
+                        <span class="path-level">🔴 Advanced</span>
+                        <span class="path-duration">2-3 days</span>
+                    </div>
+                    <h3>Formal Methods Researcher</h3>
+                    <ul class="path-steps">
+                        <li><a href="08_advanced_topics/concurrency/">Thread Semantics</a></li>
+                        <li><a href="04_verification_case_studies/compiler_correctness/">Semantic Equivalence</a></li>
+                        <li><a href="05_k_framework_deep_dive/backends/">Symbolic Backend</a></li>
+                        <li><a href="09_comparison_studies/formal_tools_comparison/">Compare Tools</a></li>
+                        <li><a href="10_community_resources/contribution_guide.md">Contribute</a></li>
+                    </ul>
+                    <p class="path-goal"><strong>Goal:</strong> Advance WebAssembly verification state-of-the-art</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials Section -->
+    <section id="tutorials" class="section tutorials">
+        <div class="container">
+            <h2 class="section-title">🎓 Featured Tutorials</h2>
+            
+            <div class="tutorials-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tutorial</th>
+                            <th>Complexity</th>
+                            <th>Time</th>
+                            <th>Highlights</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hello Wasm Semantics</strong></td>
+                            <td><span class="stars">⭐</span></td>
+                            <td>20 min</td>
+                            <td>First formal execution trace</td>
+                            <td><a href="02_interactive_tutorials/hello_wasm_semantics/" class="btn-small">Start →</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Arithmetic Operations</strong></td>
+                            <td><span class="stars">⭐⭐</span></td>
+                            <td>45 min</td>
+                            <td>Interactive stepper, overflow detection</td>
+                            <td><a href="02_interactive_tutorials/arithmetic_operations/" class="btn-small">Start →</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Control Flow</strong></td>
+                            <td><span class="stars">⭐⭐</span></td>
+                            <td>1 hour</td>
+                            <td>CFG visualization, branch semantics</td>
+                            <td><a href="02_interactive_tutorials/control_flow/" class="btn-small">Start →</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Function Calls</strong></td>
+                            <td><span class="stars">⭐⭐⭐</span></td>
+                            <td>1.5 hours</td>
+                            <td>Stack frames, recursion, tail calls</td>
+                            <td><a href="02_interactive_tutorials/function_calls/" class="btn-small">Start →</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memory Operations</strong></td>
+                            <td><span class="stars">⭐⭐⭐</span></td>
+                            <td>2 hours</td>
+                            <td>Memory safety proofs, bounds checking</td>
+                            <td><a href="02_interactive_tutorials/memory_operations/" class="btn-small">Start →</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memory Safety Case Study</strong></td>
+                            <td><span class="stars">⭐⭐⭐⭐</span></td>
+                            <td>3 hours</td>
+                            <td>Full verification workflow</td>
+                            <td><a href="04_verification_case_studies/memory_safety/" class="btn-small">Start →</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compiler Correctness</strong></td>
+                            <td><span class="stars">⭐⭐⭐⭐⭐</span></td>
+                            <td>4 hours</td>
+                            <td>Bisimulation, semantic equivalence</td>
+                            <td><a href="04_verification_case_studies/compiler_correctness/" class="btn-small">Start →</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery">
+        <div class="container">
+            <h2 class="section-title">🎨 Visualization Gallery</h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="outputs/execution_traces/fibonacci_trace.gif" alt="Execution Trace" onerror="this.src='assets/images/placeholder_execution.svg'">
+                    </div>
+                    <h3>Execution Trace Visualization</h3>
+                    <p>Watch Fibonacci computation execute instruction-by-instruction</p>
+                    <a href="03_visualization_gallery/execution_traces/" class="btn-small">Explore →</a>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="outputs/proof_trees/type_soundness_tree.png" alt="Proof Tree" onerror="this.src='assets/images/placeholder_tree.svg'">
+                    </div>
+                    <h3>Interactive Proof Tree</h3>
+                    <p>Explore formal proof of type soundness with collapsible derivation tree</p>
+                    <a href="03_visualization_gallery/proof_trees/" class="btn-small">View →</a>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="outputs/memory_diagrams/heap_stack_3d.png" alt="3D Memory" onerror="this.src='assets/images/placeholder_memory.svg'">
+                    </div>
+                    <h3>3D Memory Visualizer</h3>
+                    <p>Navigate WebAssembly linear memory in interactive 3D space</p>
+                    <a href="03_visualization_gallery/memory_models/" class="btn-small">Navigate →</a>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="outputs/rule_browser_screenshot.png" alt="Rule Browser" onerror="this.src='assets/images/placeholder_rules.svg'">
+                    </div>
+                    <h3>Semantic Rule Browser</h3>
+                    <p>Browse 500+ K rewrite rules with syntax highlighting and search</p>
+                    <a href="03_visualization_gallery/semantic_rules/" class="btn-small">Browse →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- K Framework Section -->
+    <section class="section k-framework">
+        <div class="container">
+            <h2 class="section-title">🔬 K Framework Deep Dive</h2>
+            
+            <div class="k-intro">
+                <p>The K Framework is a rewrite-based executable semantic framework where:</p>
+                <ul>
+                    <li>Programming languages are defined as term rewriting systems</li>
+                    <li>Execution is rule application on configurations</li>
+                    <li>Verification uses reachability logic and symbolic execution</li>
+                </ul>
+            </div>
+            
+            <div class="k-example">
+                <h3>Example K Rule:</h3>
+                <div class="code-block k-code">
+                    <pre><code class="language-k">rule &lt;k&gt; (i32.const I1:Int) (i32.const I2:Int) i32.add 
+         =&gt; i32.const (I1 +Int I2) ... &lt;/k&gt;
+     requires I1 +Int I2 &lt;=Int (2 ^Int 32 -Int 1)</code></pre>
+                </div>
+                
+                <div class="k-interpretation">
+                    <div class="interpretation-item">
+                        <strong>Left side:</strong> Pattern to match (two i32 constants on stack, then add instruction)
+                    </div>
+                    <div class="interpretation-item">
+                        <strong>Right side:</strong> Result (single i32 constant with sum)
+                    </div>
+                    <div class="interpretation-item">
+                        <strong>Requires:</strong> Side condition (no overflow)
+                    </div>
+                </div>
+                
+                <a href="06_interactive_playground/semantic_explorer/rule_applier.html" class="btn btn-primary">
+                    <i class="fas fa-play"></i> Try Interactive Rule Applier
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <p>An interactive educational showcase of formally verified WebAssembly semantics using the K Framework.</p>
+                    <div class="badges">
+                        <img src="https://img.shields.io/badge/K%20Framework-5.0+-blue.svg" alt="K Framework">
+                        <img src="https://img.shields.io/badge/WebAssembly-Spec%202.0-purple.svg" alt="WebAssembly">
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="01_introduction/">Introduction</a></li>
+                        <li><a href="02_interactive_tutorials/">Tutorials</a></li>
+                        <li><a href="04_verification_case_studies/">Case Studies</a></li>
+                        <li><a href="06_interactive_playground/">Playground</a></li>
+                        <li><a href="10_community_resources/">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/runtimeverification/wasm-semantics">Main Repository</a></li>
+                        <li><a href="http://www.kframework.org/">K Framework</a></li>
+                        <li><a href="https://webassembly.org/">WebAssembly</a></li>
+                        <li><a href="https://runtimeverification.com/">Runtime Verification</a></li>
+                        <li><a href="10_community_resources/research_papers.md">Research Papers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/AYUSHMIT/wasm-semantics" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://twitter.com/kframework" target="_blank">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 KWasm Formal Semantics Explorer. Released under UIUC License.</p>
+                <p>Built with 🔬 using K Framework • WebAssembly • Formal Methods</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/wasm_visualizer.js"></script>
+    <script src="assets/js/k_semantics_renderer.js"></script>
+    <script src="assets/js/state_inspector.js"></script>
+    
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.dataset.tab;
+                
+                // Update active button
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Update active content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                    if (content.dataset.tab === tabName) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.previousElementSibling;
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
