@@ -6,8 +6,9 @@ KWasm: Semantics of WebAssembly in K
 
 ---
 
-This repository presents a prototype formal semantics of [WebAssembly].
-It is currently under construction.
+This repository presents the formal semantics of [WebAssembly].
+KWasm is a mature and production-ready semantics for WebAssembly, actively developed and maintained since 2019.
+
 For examples of current capabilities, see the unit tests under the `tests/simple` directory.
 
 Repository Structure
@@ -17,9 +18,9 @@ Repository Structure
 
 The following files constitute the KWasm semantics:
 
--   [data.md](data.md) provides the (functional) data of WebAssembly (basic types, type constructors, and values).
--   [numeric.md](numeric.md) provides the functional rules for numeric operators.
--   [wasm.md](wasm.md) is the main KWasm semantics, containing the configuration and transition rules of WebAssembly.
+-   [wasm-data.md](pykwasm/src/pykwasm/kdist/wasm-semantics/wasm-data.md) provides the (functional) data of WebAssembly (basic types, type constructors, and values).
+-   [numeric.md](pykwasm/src/pykwasm/kdist/wasm-semantics/numeric.md) provides the functional rules for numeric operators.
+-   [wasm.md](pykwasm/src/pykwasm/kdist/wasm-semantics/wasm.md) is the main KWasm semantics, containing the configuration and transition rules of WebAssembly.
 
 These additional files extend the semantics to make the repository more useful:
 

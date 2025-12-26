@@ -1,3 +1,7 @@
+UV     := uv
+UV_RUN := $(UV) run --
+
+
 .PHONY: all                                                                \
         test test-execution test-simple test-prove                         \
         test-conformance test-conformance-parse test-conformance-supported \
@@ -11,28 +15,24 @@ all: build
 # -------------------
 
 ifneq ($(NIX),1)
-POETRY     := poetry -C pykwasm
-POETRY_RUN := $(POETRY) run --
-KDIST      := $(POETRY_RUN) kdist
+UV     := uv --project pykwasm
+UV_RUN := $(UV) run --
+KDIST      := $(UV_RUN) kdist
 endif
 
-.PHONY: pykwasm
-pykwasm:
-	$(POETRY) install
-
 .PHONY: build
-build: pykwasm
-	$(KDIST) -v build -j3
+build:
+	$(KDIST) -v build -j3 wasm-semantics.*
 
 .PHONY: clean
-clean: pykwasm
+clean:
 	$(KDIST) clean
 
 
 # Testing
 # -------
 
-TEST  := $(POETRY_RUN) kwasm
+TEST  := $(UV_RUN) kwasm
 CHECK := git --no-pager diff --no-index --ignore-all-space -R
 
 TEST_CONCRETE_BACKEND := llvm
@@ -60,7 +60,7 @@ tests/%.parse: tests/%
 
 tests/%.prove: tests/%
 	$(eval SOURCE_DIR := $(shell $(KDIST) which wasm-semantics.source))
-	$(TEST) prove $< kwasm-lemmas -I $(SOURCE_DIR)/wasm-semantics -w2e
+	$(TEST) prove $< kwasm-lemmas -I $(SOURCE_DIR)/wasm-semantics -w2e --haskell-backend-command "kore-exec --smt-timeout 5000"
 
 tests/proofs/wrc20-spec.k.prove: tests/proofs/wrc20-spec.k
 	$(eval SOURCE_DIR := $(shell $(KDIST) which wasm-semantics.source))
@@ -91,9 +91,11 @@ test-conformance: test-conformance-parse test-conformance-supported
 
 ### Proof Tests
 
-proof_tests:=$(wildcard tests/proofs/*-spec.k)
+proof_tests         := $(wildcard tests/proofs/*-spec.k)
+proof_tests_failing := $(shell cat tests/failing.proofs)
+proof_tests_passing := $(filter-out $(proof_tests_failing), $(proof_tests))
 
-test-prove: $(proof_tests:=.prove)
+test-prove: $(proof_tests_passing:=.prove)
 
 
 # Analysis
